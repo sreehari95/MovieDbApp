@@ -9,6 +9,9 @@ import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class ApiService {
+  removedMovie: any;
+  currentIndex: number;
+  favoriteList: any;
     public favMovieList: MovieList[];
     baseUrl:string='https://api.themoviedb.org/3/discover/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&page=';
     searchUrl:string='https://api.themoviedb.org/3/search/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&query=';
@@ -66,12 +69,38 @@ export class ApiService {
            }
            else{
             
-
-            this.showToast("bottom","Already In Favorites");
+            this.remove(clickedMovie);
+            
            }   
      
          }
       }
+
+      remove(selectedMovie:MovieList){
+        this.favoriteList=JSON.parse(localStorage.getItem('favList'));
+        console.log(this.favoriteList);
+        for(let i=0;i<this.favoriteList.length;i++){
+          if(selectedMovie.id==this.favoriteList[i].id){
+            this.currentIndex=this.favoriteList[i].index;
+          }
+        }
+      //  console.log( this.favMovieList.find(x=>x.id==selectedMovie.id));
+           
+           
+           
+      //   this.currentIndex=selectedMovie.index;
+      
+         this.removedMovie=this.favoriteList.splice(this.currentIndex,1);
+      
+      
+         for(let i=this.currentIndex;i<this.favoriteList.length;i++){
+             this.favoriteList[i].index=this.favoriteList[i].index-1;
+            
+         }
+      
+         window.localStorage.setItem('favList',JSON.stringify(this.favoriteList));
+         this.showToast("bottom","Remove from Favorites")
+     }
 
       showToast(position: string,send:string) {
         const toast = this.toastCtrl.create({

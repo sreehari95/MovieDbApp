@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MovieList } from '../../shared/movieListModal';
-import { Console } from '@angular/core/src/console';
 import { MovieDetailsPage } from '../movie-details/movie-details';
 
 import { ApiService } from '../../shared/apiService';
@@ -20,8 +19,14 @@ export class ListPage {
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiService:ApiService) {
-    this.favoriteList=JSON.parse(localStorage.getItem('favList'))
+  
     
+}
+ionViewWillEnter(){
+  this.ionViewDidLoad();
+}
+ionViewDidLoad() {
+  this.favoriteList=JSON.parse(localStorage.getItem('favList'));
 }
 
 readMore(clickedMovie: MovieList) {
@@ -30,17 +35,21 @@ readMore(clickedMovie: MovieList) {
 
 }
 remove(selectedMovie:MovieList){
-  this.currentIndex=selectedMovie.index;
-
-  this.removedMovie=this.favoriteList.splice(this.currentIndex,1);
-
-
-  for(let i=this.currentIndex;i<this.favoriteList.length;i++){
-      this.favoriteList[i].index=this.favoriteList[i].index-1;
-      
-  }
-
-  window.localStorage.setItem('favList',JSON.stringify(this.favoriteList));
-  this.apiService.showToast("bottom","Remove from Favorites")
+  this.apiService.remove(selectedMovie);
+  this.ionViewWillEnter();
 }
+// remove(selectedMovie:MovieList){
+//   this.currentIndex=selectedMovie.index;
+
+//   this.removedMovie=this.favoriteList.splice(this.currentIndex,1);
+
+
+//   for(let i=this.currentIndex;i<this.favoriteList.length;i++){
+//       this.favoriteList[i].index=this.favoriteList[i].index-1;
+      
+//   }
+
+//   window.localStorage.setItem('favList',JSON.stringify(this.favoriteList));
+//   this.apiService.showToast("bottom","Remove from Favorites")
+// }
 }
