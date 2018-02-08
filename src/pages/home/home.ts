@@ -35,7 +35,9 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.apiService.getMovieList().subscribe(data => {
+    let data={'key':'&page', 'value': this.pageNumber.toString()}
+    console.log(data);
+    this.apiService.getMovieList(data).subscribe(data => {
       this.moviePage = data;
       this.movieList = data.results;
     });
@@ -44,7 +46,10 @@ export class HomePage {
   loadMore(event) {
    
     this.pageNumber = this.pageNumber + 1;
-    this.apiService.getMoreMovieList(this.pageNumber).subscribe(data => {
+    
+    let data={'key':'page', 'value': this.pageNumber.toString()}
+    console.log(data);
+    this.apiService.getMovieList(data).subscribe(data => {
       this.movieList = this.movieList.concat(data.results);
       event.complete();
     });

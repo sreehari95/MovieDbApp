@@ -23,11 +23,11 @@ export class ListPage {
     
 }
 ionViewWillEnter(){
-  this.ionViewDidLoad();
-}
-ionViewDidLoad() {
+  
   this.favoriteList=JSON.parse(localStorage.getItem('favList'));
+
 }
+
 
 readMore(clickedMovie: MovieList) {
   this.selectedMovie = clickedMovie;
