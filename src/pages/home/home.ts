@@ -36,7 +36,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     let data={'key':'&page', 'value': this.pageNumber.toString()}
-    console.log(data);
+  
     this.apiService.getMovieList(data).subscribe(data => {
       this.moviePage = data;
       this.movieList = data.results;
