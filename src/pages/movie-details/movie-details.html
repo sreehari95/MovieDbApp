@@ -1,0 +1,34 @@
+<!--
+  Generated template for the MovieDetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>movieDetails</ion-title>
+  </ion-navbar> 
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-col><h1>{{selectedMovie.title}}</h1>
+  </ion-col>
+  <img src="https://image.tmdb.org/t/p/w500{{selectedMovie.poster_path}}" alt="">
+
+  <h4>Release Date</h4><span>{{selectedMovie.release_date}}</span>
+  <h4>Overview</h4><span>{{selectedMovie.overview}}</span>
+  <h4>Rating:</h4><span>{{selectedMovie.vote_average}}/10</span>
+  <h4>Total Votes</h4><span>{{selectedMovie.vote_count}}</span>
+
+
+
+</ion-content>
+<ion-footer>
+  <button ion-button full color="danger" (click)="addToFav()"> <ion-icon [name]="getfavouritefilled(selectedMovie.id)" danger ></ion-icon> 
+    <div> Favorite</div>
+  </button>
+
+</ion-footer>

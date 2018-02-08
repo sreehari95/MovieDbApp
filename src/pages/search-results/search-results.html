@@ -1,0 +1,60 @@
+<!--
+  Generated template for the SearchResultsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-searchbar
+        [(ngModel)]="searchLabel"
+        [showCancelButton]="shouldShowCancel"
+        (search)="searchMovie($event)">
+      </ion-searchbar>
+        
+    </ion-navbar>
+  </ion-header>
+
+
+<ion-content padding>
+
+    <ion-card *ngFor="let a of searchmovieList">
+        <img src="https://image.tmdb.org/t/p/w500{{a.poster_path}}">
+        <ion-item color="primary">
+          <ion-col col-10 class="heading">{{a.title}}</ion-col>
+          <ion-col col-2 class="heading">({{a.release_date | date:"yyyy"}})</ion-col>
+        
+        </ion-item>
+      
+    
+      
+        <ion-card-content >
+          <p style="text-overflow: ellipsis; ">{{a.overview}}</p> 
+        </ion-card-content>
+      
+        <ion-row>
+          <ion-col col-6>
+              <button ion-button icon-left clear outline icon-start color="danger" (click)="readMore(a)">
+                  <ion-icon name="paper" danger ></ion-icon>
+                  <div>Read More</div>
+                </button>
+        
+    
+          </ion-col>
+          <ion-col>
+              <button ion-button icon-left clear outline color="danger" (click)="addToFav(a)">
+                <ion-icon [name]="getfavouritefilled(a.id)" danger ></ion-icon>
+                <div>Favourite</div>
+              </button>
+            </ion-col>
+        </ion-row>
+      
+      </ion-card>
+    
+
+</ion-content>
+
+<ion-footer>
+  
+  </ion-footer>
+

@@ -3,21 +3,44 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Favorite</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+<ion-content padding>
+    <h3>Favourite List</h3> 
+
+    <ion-card *ngFor="let a of favoriteList">
+        <img src="https://image.tmdb.org/t/p/w500{{a.poster_path}}">
+        <ion-item color="primary">
+          <ion-col col-10 class="heading">{{a.title}}</ion-col>
+          <ion-col col-2 class="heading">({{a.release_date | date:"yyyy"}})</ion-col>
+        
+        </ion-item>
+      
+    
+      
+        <ion-card-content >
+          <p style="text-overflow: ellipsis; ">{{a.overview}}</p>
+        </ion-card-content>
+      
+        <ion-row>
+          <ion-col col-6>
+              <button ion-button icon-left clear outline icon-start color="danger" (click)="readMore(a)">
+                  <ion-icon name="paper" danger ></ion-icon>
+                  <div>Read More</div>
+                </button>
+        
+    
+          </ion-col>
+          <ion-col>
+            <button ion-button icon-left clear outline color="danger" (click)="remove(a)">
+              <ion-icon name="trash" danger ></ion-icon>
+              <div>Remove</div>
+            </button>
+          </ion-col>
+        </ion-row>
+      
+      </ion-card>
+  
 </ion-content>
