@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, RequestOptions,  Headers } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
 import { MovieList, MoviePage } from './movieListModal';
@@ -10,7 +10,8 @@ import { ToastController } from 'ionic-angular';
 @Injectable()
 export class ApiService {
     public favMovieList: MovieList[];
-    baseUrl:string="https://api.themoviedb.org/3/discover/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&page=";
+    baseUrl:string='https://api.themoviedb.org/3/discover/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&page=';
+    searchUrl:string='https://api.themoviedb.org/3/search/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&query=';
 
     constructor( private http:Http,private toastCtrl: ToastController) {
     }
@@ -24,14 +25,14 @@ export class ApiService {
       }
 
       getMoreMovieList(page:number):Observable<MoviePage>{
-        return this.http.get(`https://api.themoviedb.org/3/discover/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&page=${page}`)
+        return this.http.get(`${this.baseUrl}${page}`)
            .map((response:Response)=> {
               return response.json();
           });
       }
 
       searchMovies(name:string){
-          return this.http.get('https://api.themoviedb.org/3/search/movie?api_key=adb4ddaf26e9d6ed16a2a5a737314990&query='+name)
+          return this.http.get(`${this.searchUrl}${name}`)
           .map((response:Response)=> {
             return response.json();
         });
@@ -64,11 +65,7 @@ export class ApiService {
            
            }
            else{
-            // this.toast.show(`Aleady in Favorite List`, '5000', 'center').subscribe(
-            //   toast => {
-            //     console.log(toast);
-            //   }
-            // );
+            
 
             this.showToast("bottom","Already In Favorites");
            }   
