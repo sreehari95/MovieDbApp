@@ -27,7 +27,7 @@ export class ApiService {
       
       let urlParam= new URLSearchParams();
       urlParam.set(data.key, data.value);
-      console.log({search:urlParam});
+    
         return this.http.get(`${this.baseUrl}`,{search: urlParam})
            .map((response:Response)=> {
               return response.json();

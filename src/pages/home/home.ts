@@ -48,7 +48,7 @@ export class HomePage {
     this.pageNumber = this.pageNumber + 1;
     
     let data={'key':'page', 'value': this.pageNumber.toString()}
-    console.log(data);
+  
     this.apiService.getMovieList(data).subscribe(data => {
       this.movieList = this.movieList.concat(data.results);
       event.complete();
