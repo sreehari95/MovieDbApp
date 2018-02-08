@@ -38,18 +38,4 @@ remove(selectedMovie:MovieList){
   this.apiService.remove(selectedMovie);
   this.ionViewWillEnter();
 }
-// remove(selectedMovie:MovieList){
-//   this.currentIndex=selectedMovie.index;
-
-//   this.removedMovie=this.favoriteList.splice(this.currentIndex,1);
-
-
-//   for(let i=this.currentIndex;i<this.favoriteList.length;i++){
-//       this.favoriteList[i].index=this.favoriteList[i].index-1;
-      
-//   }
-
-//   window.localStorage.setItem('favList',JSON.stringify(this.favoriteList));
-//   this.apiService.showToast("bottom","Remove from Favorites")
-// }
 }

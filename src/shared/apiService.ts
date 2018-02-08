@@ -78,17 +78,13 @@ export class ApiService {
 
       remove(selectedMovie:MovieList){
         this.favoriteList=JSON.parse(localStorage.getItem('favList'));
-        console.log(this.favoriteList);
+        
         for(let i=0;i<this.favoriteList.length;i++){
           if(selectedMovie.id==this.favoriteList[i].id){
             this.currentIndex=this.favoriteList[i].index;
           }
         }
-      //  console.log( this.favMovieList.find(x=>x.id==selectedMovie.id));
-           
-           
-           
-      //   this.currentIndex=selectedMovie.index;
+     
       
          this.removedMovie=this.favoriteList.splice(this.currentIndex,1);
       
@@ -109,7 +105,6 @@ export class ApiService {
           duration: 1000
         });
     
-        // toast.onDidDismiss(this.dismissHandler);
         toast.present();
       }
 }
