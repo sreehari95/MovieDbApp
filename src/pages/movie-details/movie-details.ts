@@ -43,16 +43,18 @@ export class MovieDetailsPage {
 
   getfavouritefilled(id){
     const favourite = JSON.parse(localStorage.getItem('favList'));
+    if(favourite==null){
+      return 'heart-outline'
+    }
     const index = favourite.findIndex(res=>{
       return res.id == id;
     })
-    
+ 
     if(index>=0){
       return 'heart'
     }else{
       return 'heart-outline'
     }
-   
   }
 
 }
